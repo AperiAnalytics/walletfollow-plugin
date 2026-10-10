@@ -1,7 +1,7 @@
 {
   "name": "walletfollow",
   "displayName": "WalletFollow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Research Hyperliquid wallets, markets and copy portfolios with source freshness, costs and coverage.",
   "author": {
     "name": "WalletFollow",

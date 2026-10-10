@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "walletfollow",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Research Hyperliquid wallets, markets and copy portfolios with explicit source freshness, costs and coverage.",
   "author": {
     "name": "WalletFollow",

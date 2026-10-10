@@ -59,7 +59,7 @@ The host sends only chosen tool arguments and OAuth credentials to `mcp.walletfo
 ```sh
 claude plugin validate ./walletfollow --strict
 python3 ./walletfollow/scripts/package.py --check
-python3 ./walletfollow/scripts/package.py --output /tmp/walletfollow-1.0.0.zip
+python3 ./walletfollow/scripts/package.py --output /tmp/walletfollow-1.0.1.zip
 ```
 
 Run the first command from the folder containing the plugin. Packaging uses only files inside this folder, rejects symlinks/oversized text/literal credential patterns and never includes the rest of the source repository. The MIT license applies to this package only; it does not license the service, monorepo, user data or third-party APIs.
@@ -67,3 +67,5 @@ Run the first command from the folder containing the plugin. Packaging uses only
 Directory review, publisher verification, test-account authorization and legal attestations take place in the owner account. Local package validation does not mean an official marketplace approved it. Hosted service availability and fresh authenticated integration checks are separate from package validation.
 
 Support contact: `info@walletfollow.ai`. The owner is provisioning this mailbox; confirm it receives mail before directory submission. The hosted support page records the current contact status.
+
+Security controls are available in the account API tab: key expiry, exact IP allowlists, daily read-request limits, rotation/revocation, and individual MCP connection revocation. Limits count admitted research/account GET attempts, with usage inspection exempt, and reset at midnight UTC. They do not cap money or credits. A rotating refresh token is single-use; a confirmed replay revokes that connection and requires fresh browser authorization.
