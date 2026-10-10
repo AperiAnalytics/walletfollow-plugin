@@ -1,0 +1,44 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "walletfollow",
+  "version": "1.0.0",
+  "description": "Research Hyperliquid wallets, markets and copy portfolios with explicit source freshness, costs and coverage.",
+  "author": {
+    "name": "WalletFollow",
+    "url": "https://walletfollow.ai",
+    "email": "info@walletfollow.ai"
+  },
+  "homepage": "https://mcp.walletfollow.ai/",
+  "license": "MIT",
+  "keywords": [
+    "hyperliquid",
+    "wallet-research",
+    "portfolio-research",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/walletfollow-connect/SKILL.md",
+      "interface": {
+        "displayName": "WalletFollow",
+        "shortDescription": "Hyperliquid wallet and portfolio research",
+        "longDescription": "Inspect wallet metrics, positions, retained history, market observations and published copy portfolios. Read-only account reports require the customer's existing permissions. Results preserve source timestamps and missing coverage; this plugin cannot execute trades or request wallet signatures.",
+        "developerName": "WalletFollow",
+        "category": "Productivity",
+        "capabilities": [
+          "Read"
+        ],
+        "websiteURL": "https://walletfollow.ai",
+        "privacyPolicyURL": "https://mcp.walletfollow.ai/privacy",
+        "termsOfServiceURL": "https://mcp.walletfollow.ai/terms",
+        "logo": "./assets/walletfollow.svg",
+        "composerIcon": "./assets/walletfollow.svg",
+        "defaultPrompt": [
+          "Compare these wallets' 30-day PnL, costs, source age and history gaps.",
+          "Screen ten wallets by 30-day realized PnL and explain the coverage limits.",
+          "Summarize a published copy portfolio's weights, exposures and statistics."
+        ]
+      }
+    }
+  }
+}

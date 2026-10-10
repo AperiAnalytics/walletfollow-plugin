@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "walletfollow": {
+      "type": "http",
+      "url": "https://mcp.walletfollow.ai/mcp",
+      "oauth": {
+        "scopes": "data:read offline_access"
+      }
+    }
+  }
+}

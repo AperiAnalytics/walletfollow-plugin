@@ -1,0 +1,12 @@
+{
+  "name": "walletfollow-plugins",
+  "owner": { "name": "WalletFollow" },
+  "metadata": { "description": "WalletFollow research plugins for Hyperliquid wallets, markets and copy portfolios." },
+  "plugins": [
+    {
+      "name": "walletfollow",
+      "source": "./plugins/walletfollow",
+      "description": "Hyperliquid wallet and portfolio research with source freshness and coverage."
+    }
+  ]
+}

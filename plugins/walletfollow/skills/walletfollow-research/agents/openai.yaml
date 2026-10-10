@@ -1,0 +1,4 @@
+interface:
+  display_name: "WalletFollow Research"
+  short_description: "Research Hyperliquid wallets and copy portfolios"
+  default_prompt: "Use $walletfollow-research to compare wallet performance, source age and coverage."

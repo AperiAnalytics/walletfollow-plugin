@@ -1,0 +1,4 @@
+interface:
+  display_name: "Connect WalletFollow"
+  short_description: "Connect and troubleshoot WalletFollow research"
+  default_prompt: "Use $walletfollow-connect to connect WalletFollow securely and check my API access."

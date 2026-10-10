@@ -1,0 +1,1236 @@
+{
+  "schema": "walletfollow-plugin-operation-reference/v1",
+  "operations": [
+    {
+      "tool": "wf_get_account_wallets",
+      "method": "GET",
+      "path": "/v1/account/wallets",
+      "oauth_scope": "wallets:read",
+      "marketplace_available": true,
+      "description": "List watched wallet bookmarks. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_trading_accounts",
+      "method": "GET",
+      "path": "/v1/account/trading-accounts",
+      "oauth_scope": "trading-accounts:read",
+      "marketplace_available": true,
+      "description": "List connected trading accounts. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "environment": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "hyperliquid-mainnet"
+                  },
+                  {
+                    "type": "string",
+                    "const": "hyperliquid-testnet"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_trading_accounts_id",
+      "method": "GET",
+      "path": "/v1/account/trading-accounts/{id}",
+      "oauth_scope": "trading-accounts:read",
+      "marketplace_available": true,
+      "description": "Read one connected account and its approval checklist. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^tac_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_trading_accounts_id_setup_precheck",
+      "method": "GET",
+      "path": "/v1/account/trading-accounts/{id}/setup-precheck",
+      "oauth_scope": "trading-accounts:read",
+      "marketplace_available": true,
+      "description": "Read wallet eligibility, approvals and balances. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^tac_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_trade_markets_summary",
+      "method": "GET",
+      "path": "/v1/trade/markets/summary",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared market summary. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_trade_markets_coin_positioning",
+      "method": "GET",
+      "path": "/v1/trade/markets/{coin}/positioning",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared market positioning. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "coin": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+          }
+        },
+        "required": [
+          "coin"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_trade_markets_coin_tape",
+      "method": "GET",
+      "path": "/v1/trade/markets/{coin}/tape",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared market tape. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "coin": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+          }
+        },
+        "required": [
+          "coin"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_trade_markets_coin_history",
+      "method": "GET",
+      "path": "/v1/trade/markets/{coin}/history",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared market history. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "coin": {
+            "type": "string",
+            "maxLength": 40,
+            "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+          }
+        },
+        "required": [
+          "coin"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_trade_watched_positions",
+      "method": "GET",
+      "path": "/v1/account/trade/watched-positions",
+      "oauth_scope": "trade:read",
+      "marketplace_available": true,
+      "description": "Positions in the customer watchlist. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "string",
+                "maxLength": 40,
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              }
+            },
+            "required": [
+              "coin"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_trade_orders",
+      "method": "GET",
+      "path": "/v1/account/trade/orders",
+      "oauth_scope": "trade:read",
+      "marketplace_available": true,
+      "description": "Read manual order intents. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_capabilities",
+      "method": "GET",
+      "path": "/v1/copy/capabilities",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public copy capabilities. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_engine_scope",
+      "method": "GET",
+      "path": "/v1/copy/engine-scope",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public copy engine-scope. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios",
+      "method": "GET",
+      "path": "/v1/copy/portfolios",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public copy portfolios. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 48
+              },
+              "q": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80
+              },
+              "sort": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "ret_dd_30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "roi_30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "roi_7d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "max_dd"
+                  },
+                  {
+                    "type": "string",
+                    "const": "sharpe_30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "watchers"
+                  },
+                  {
+                    "type": "string",
+                    "const": "newest"
+                  },
+                  {
+                    "type": "string",
+                    "const": "roi_since_start"
+                  },
+                  {
+                    "type": "string",
+                    "const": "risk"
+                  }
+                ]
+              },
+              "period": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "7d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "90d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "all"
+                  }
+                ]
+              },
+              "tab": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "all"
+                  },
+                  {
+                    "type": "string",
+                    "const": "watched"
+                  }
+                ]
+              },
+              "leader": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^0x[0-9a-f]{40}$"
+              },
+              "coin": {
+                "type": "string",
+                "maxLength": 40,
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              },
+              "risk": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "lt3"
+                  },
+                  {
+                    "type": "string",
+                    "const": "3to5"
+                  },
+                  {
+                    "type": "string",
+                    "const": "gte5"
+                  },
+                  {
+                    "type": "string",
+                    "const": "low"
+                  },
+                  {
+                    "type": "string",
+                    "const": "medium"
+                  },
+                  {
+                    "type": "string",
+                    "const": "high"
+                  }
+                ]
+              },
+              "leaders_min": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+              },
+              "leaders_max": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 20
+              },
+              "fee": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "none"
+                  },
+                  {
+                    "type": "string",
+                    "const": "le10"
+                  },
+                  {
+                    "type": "string",
+                    "const": "any"
+                  }
+                ]
+              },
+              "tracked_days_min": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3650
+              },
+              "style": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "swing"
+                  },
+                  {
+                    "type": "string",
+                    "const": "majors"
+                  },
+                  {
+                    "type": "string",
+                    "const": "hip3"
+                  },
+                  {
+                    "type": "string",
+                    "const": "low_leverage"
+                  }
+                ]
+              },
+              "listing": {
+                "type": "string",
+                "const": "ranked"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_shelves",
+      "method": "GET",
+      "path": "/v1/copy/shelves",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public copy shelves. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "7d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "90d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "all"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public published portfolio. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_versions_version",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/versions/{version}",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Immutable published portfolio version. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 999999999
+          }
+        },
+        "required": [
+          "handle",
+          "slug",
+          "version"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_copyability",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/copyability",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Published portfolio engine eligibility and copyability. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_stats",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/stats",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Published copy portfolio stats. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 999999999
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_exposure",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/exposure",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Published copy portfolio exposure. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_feed",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/feed",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Published copy portfolio feed. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_portfolios_handle_slug_card",
+      "method": "GET",
+      "path": "/v1/copy/portfolios/{handle}/{slug}/card",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Published copy portfolio card. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60,
+            "pattern": "^[a-z0-9](?:[a-z0-9-]{0,58}[a-z0-9])?$"
+          }
+        },
+        "required": [
+          "handle",
+          "slug"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_copy_creators_handle",
+      "method": "GET",
+      "path": "/v1/copy/creators/{handle}",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Public creator profile. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "handle": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-z0-9-]{3,24}$"
+          }
+        },
+        "required": [
+          "handle"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_capabilities",
+      "method": "GET",
+      "path": "/v1/account/copy-capabilities",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Current copy and trading capability gates. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_portfolios",
+      "method": "GET",
+      "path": "/v1/account/copy-portfolios",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Compatibility portfolio catalog. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 48
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "List copy subscriptions. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_setup_precheck",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/setup-precheck",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read copy setup-precheck, including desired and effective engine state. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "trading_account_id": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^tac_[0-9a-f]{20}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_status",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/status",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read copy status, including desired and effective engine state. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_results",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/results",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read owned copy results; bounded reporting with account restrictions. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_fills",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/fills",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read owned copy fills; bounded reporting with account restrictions. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_orders",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/orders",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read owned copy orders; bounded reporting with account restrictions. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_subscriptions_id_decisions",
+      "method": "GET",
+      "path": "/v1/account/copy-subscriptions/{id}/decisions",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read owned copy decisions; bounded reporting with account restrictions. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^csub_[0-9a-f]{20}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_watches",
+      "method": "GET",
+      "path": "/v1/account/copy-watches",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "List watched portfolios. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator",
+      "method": "GET",
+      "path": "/v1/account/copy-creator",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read the creator profile and accepted terms. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_portfolios",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/portfolios",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "List owned portfolio workspaces. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_portfolios_id",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/portfolios/{id}",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read an owned portfolio workspace. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^cpf_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_leaders_address_returns",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/leaders/{address}/returns",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read prepared leader return vectors. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "24h"
+                  },
+                  {
+                    "type": "string",
+                    "const": "7d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "30d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "90d"
+                  },
+                  {
+                    "type": "string",
+                    "const": "1y"
+                  },
+                  {
+                    "type": "string",
+                    "const": "all"
+                  }
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_earnings",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/earnings",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read creator earnings; no fund movement. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_statements",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/statements",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read creator statements; no fund movement. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_creator_payout_identity",
+      "method": "GET",
+      "path": "/v1/account/copy-creator/payout-identity",
+      "oauth_scope": "creator:read",
+      "marketplace_available": true,
+      "description": "Read creator payout-identity; no fund movement. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_invoices",
+      "method": "GET",
+      "path": "/v1/account/copy-invoices",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "List the customer invoices. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "cursor": {
+                "type": "string",
+                "maxLength": 8192,
+                "pattern": "^[A-Za-z0-9_-]{1,400}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_account_copy_invoices_id",
+      "method": "GET",
+      "path": "/v1/account/copy-invoices/{id}",
+      "oauth_scope": "copy:read",
+      "marketplace_available": true,
+      "description": "Read an invoice owned by the customer. Read only. Returns original availability, coverage, timestamps and gaps. Capability reports describe current support.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 8192,
+            "pattern": "^inv_[0-9a-f]{20}$"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "additionalProperties": false
+      }
+    }
+  ]
+}

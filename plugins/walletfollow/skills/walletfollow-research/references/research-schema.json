@@ -1,0 +1,1663 @@
+{
+  "schema": "walletfollow-plugin-operation-reference/v1",
+  "operations": [
+    {
+      "tool": "wf_get_wallet",
+      "method": "GET",
+      "path": "/v1/wallets/{address}",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "One Hyperliquid wallet: account, positions, spot, per-period metrics and profile; with include=trades also the trade analysis. Request weight 1 (5 when include=trades). Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "include": {
+                "type": "string",
+                "const": "trades"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_account",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/account",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet account; bounded, freshness-labelled view. Request weight 1. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_positions",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/positions",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet positions; bounded, freshness-labelled view. Request weight 1. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+              },
+              "dex": {
+                "type": "string",
+                "pattern": "^(?:|[a-z][a-z0-9_]{0,31})$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_spot",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/spot",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet spot; bounded, freshness-labelled view. Request weight 1. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_metrics",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/metrics",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet metrics; bounded, freshness-labelled view. Request weight 1. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "type": "string",
+                "enum": [
+                  "24H",
+                  "7D",
+                  "30D",
+                  "90D",
+                  "ALL"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_profile",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/profile",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet profile; bounded, freshness-labelled view. Request weight 1. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_analysis",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/analysis",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet analysis; bounded, freshness-labelled view. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "type": "string",
+                "enum": [
+                  "24H",
+                  "7D",
+                  "30D",
+                  "90D",
+                  "ALL"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_trades",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/trades",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet trades; bounded, freshness-labelled view. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "coin": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64,
+                "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+              },
+              "dex": {
+                "type": "string",
+                "pattern": "^(?:|[a-z][a-z0-9_]{0,31})$"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "open",
+                  "closed"
+                ]
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_screener",
+      "method": "GET",
+      "path": "/v1/wallets/top",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Prepared wallet screener, with bounded filters and pagination. Request weight 5–20 depending on page size. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "object",
+            "properties": {
+              "period": {
+                "type": "string",
+                "enum": [
+                  "24H",
+                  "7D",
+                  "30D",
+                  "90D",
+                  "ALL"
+                ]
+              },
+              "sort": {
+                "type": "string",
+                "enum": [
+                  "total_assets_usd",
+                  "equity_usd",
+                  "unrealized_pnl_usd",
+                  "long_notional_usd",
+                  "short_notional_usd",
+                  "position_leverage",
+                  "margin_ratio",
+                  "open_positions",
+                  "last_trade_ms",
+                  "fill_realized_usd",
+                  "closed_pnl_usd",
+                  "fees_usd",
+                  "long_pnl_usd",
+                  "short_pnl_usd",
+                  "perp_notional_usd",
+                  "trade_count",
+                  "closed_positions",
+                  "wins",
+                  "losses",
+                  "long_wins",
+                  "long_losses",
+                  "short_wins",
+                  "short_losses",
+                  "win_rate",
+                  "long_win_rate",
+                  "short_win_rate",
+                  "median_hold_ms",
+                  "volume_capital_ratio",
+                  "venue_pnl_usd",
+                  "venue_volume_usd",
+                  "roi_pct",
+                  "max_drawdown_pct",
+                  "current_drawdown_pct",
+                  "recovery",
+                  "calmar",
+                  "trader_score",
+                  "score_percentile"
+                ]
+              },
+              "dir": {
+                "type": "string",
+                "enum": [
+                  "asc",
+                  "desc"
+                ]
+              },
+              "segment": {
+                "type": "string",
+                "enum": [
+                  "ranked",
+                  "excluded",
+                  "all"
+                ]
+              },
+              "cohort": {
+                "type": "string",
+                "enum": [
+                  "all",
+                  "recommended"
+                ]
+              },
+              "whale": {
+                "type": "boolean"
+              },
+              "tag": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z ]{0,31}$"
+              },
+              "market_class": {
+                "type": "string",
+                "enum": [
+                  "native",
+                  "hip3"
+                ]
+              },
+              "main_dex": {
+                "type": "string",
+                "pattern": "^[a-z0-9]{1,16}$"
+              },
+              "account_mode": {
+                "type": "string",
+                "enum": [
+                  "default",
+                  "unifiedAccount",
+                  "portfolioMargin",
+                  "disabled"
+                ]
+              },
+              "fields": {
+                "minItems": 1,
+                "maxItems": 37,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "total_assets_usd",
+                    "equity_usd",
+                    "unrealized_pnl_usd",
+                    "long_notional_usd",
+                    "short_notional_usd",
+                    "position_leverage",
+                    "margin_ratio",
+                    "open_positions",
+                    "last_trade_ms",
+                    "fill_realized_usd",
+                    "closed_pnl_usd",
+                    "fees_usd",
+                    "long_pnl_usd",
+                    "short_pnl_usd",
+                    "perp_notional_usd",
+                    "trade_count",
+                    "closed_positions",
+                    "wins",
+                    "losses",
+                    "long_wins",
+                    "long_losses",
+                    "short_wins",
+                    "short_losses",
+                    "win_rate",
+                    "long_win_rate",
+                    "short_win_rate",
+                    "median_hold_ms",
+                    "volume_capital_ratio",
+                    "venue_pnl_usd",
+                    "venue_volume_usd",
+                    "roi_pct",
+                    "max_drawdown_pct",
+                    "current_drawdown_pct",
+                    "recovery",
+                    "calmar",
+                    "trader_score",
+                    "score_percentile"
+                  ]
+                }
+              },
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 500
+              },
+              "cursor": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 400,
+                "pattern": "^[A-Za-z0-9_-]+$"
+              },
+              "filters": {
+                "type": "object",
+                "properties": {
+                  "total_assets_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "equity_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "unrealized_pnl_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "long_notional_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "short_notional_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "position_leverage": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "margin_ratio": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "open_positions": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "last_trade_ms": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "fill_realized_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "closed_pnl_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "fees_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "long_pnl_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "short_pnl_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "perp_notional_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "trade_count": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "closed_positions": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "wins": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "losses": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "long_wins": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "long_losses": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "short_wins": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "short_losses": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "win_rate": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "long_win_rate": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "short_win_rate": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "median_hold_ms": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "volume_capital_ratio": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "venue_pnl_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "venue_volume_usd": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "roi_pct": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "max_drawdown_pct": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "current_drawdown_pct": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "recovery": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "calmar": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "trader_score": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "score_percentile": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      },
+                      "max": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 64,
+                        "pattern": "^[^\\u0000-\\u001f\\u007f]*$"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_open_orders",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/open-orders",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded observed open orders. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "coin": {
+                "type": "string",
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_order_history",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/order-history",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded retained order history. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "coin": {
+                "type": "string",
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_fills",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/fills",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded account fills or latest TWAP slices, with explicit coverage. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "start_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "end_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "coin": {
+                "type": "string",
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "fills",
+                  "twap"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_funding",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/funding",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded account funding history. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "start_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "end_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "coin": {
+                "type": "string",
+                "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_transfers",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/transfers",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded non-funding ledger observations; no fund movement. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "start_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "end_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_vaults",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/vaults",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Observed vault-equity records; no vault actions. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_staking",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/staking",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Staking summary, delegations or retained history; no staking actions. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "limit": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 100
+              },
+              "offset": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1999
+              },
+              "snapshot": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "part": {
+                "type": "string",
+                "enum": [
+                  "summary",
+                  "delegations",
+                  "history"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_wallet_portfolio",
+      "method": "GET",
+      "path": "/v1/wallets/{address}/portfolio",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Observed native portfolio families and bounded series. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "family": {
+                "type": "string",
+                "enum": [
+                  "day",
+                  "week",
+                  "month",
+                  "allTime",
+                  "perpDay",
+                  "perpWeek",
+                  "perpMonth",
+                  "perpAllTime"
+                ]
+              },
+              "points": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2000
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_markets_coin_candles",
+      "method": "GET",
+      "path": "/v1/markets/{coin}/candles",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Bounded public market candles; never execution authority. Request weight 5. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {
+          "coin": {
+            "type": "string",
+            "pattern": "^[@A-Za-z0-9][A-Za-z0-9@:._/-]{0,39}$"
+          },
+          "query": {
+            "type": "object",
+            "properties": {
+              "start_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "end_ms": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9999999999999
+              },
+              "interval": {
+                "type": "string",
+                "enum": [
+                  "1m",
+                  "3m",
+                  "5m",
+                  "15m",
+                  "30m",
+                  "1h",
+                  "2h",
+                  "4h",
+                  "8h",
+                  "12h",
+                  "1d",
+                  "3d",
+                  "1w",
+                  "1M"
+                ]
+              }
+            },
+            "required": [
+              "interval"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "coin",
+          "query"
+        ],
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_usage",
+      "method": "GET",
+      "path": "/v1/usage",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "The calling key's plan and the account's live minute and month counters. Request weight 0. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_catalog",
+      "method": "GET",
+      "path": "/v1/catalog",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "Endpoints, weights, public plans, error codes and headers as JSON. Request weight 0. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    },
+    {
+      "tool": "wf_get_openapi_json",
+      "method": "GET",
+      "path": "/v1/openapi.json",
+      "oauth_scope": "data:read",
+      "marketplace_available": true,
+      "description": "This API as an OpenAPI 3.1 document (JSON). Request weight 0. Returns original decimal strings, source timestamps, coverage, gaps, pagination and INCOMPLETE results.",
+      "input_schema": {
+        "$schema": "https://json-schema.org/draft/2020-12/schema",
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      }
+    }
+  ]
+}

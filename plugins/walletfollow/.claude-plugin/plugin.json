@@ -1,0 +1,24 @@
+{
+  "name": "walletfollow",
+  "displayName": "WalletFollow",
+  "version": "1.0.0",
+  "description": "Research Hyperliquid wallets, markets and copy portfolios with source freshness, costs and coverage.",
+  "author": {
+    "name": "WalletFollow",
+    "url": "https://walletfollow.ai",
+    "email": "info@walletfollow.ai"
+  },
+  "homepage": "https://mcp.walletfollow.ai/",
+  "license": "MIT",
+  "keywords": [
+    "hyperliquid",
+    "wallet-research",
+    "portfolio-research",
+    "mcp"
+  ],
+  "icon": "./assets/walletfollow.svg",
+  "documentationUrl": "https://mcp.walletfollow.ai/",
+  "supportUrl": "https://mcp.walletfollow.ai/support",
+  "privacyPolicyUrl": "https://mcp.walletfollow.ai/privacy",
+  "termsOfServiceUrl": "https://mcp.walletfollow.ai/terms"
+}
