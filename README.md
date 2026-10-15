@@ -4,6 +4,8 @@ Research Hyperliquid wallets, markets, published copy portfolios and permitted o
 
 The plugin includes two skills, one remote server at `https://mcp.walletfollow.ai/mcp`, and a reference for all 100 API operations. The marketplace exposes 62 GET tools. Its 38 financial/customer mutations stay in the WalletFollow dashboard. Authorization begins with only `data:read` and `offline_access`; private reports need exact optional read scopes, existing API permissions and the current account eligibility.
 
+Website: [walletfollow.ai](https://walletfollow.ai) · [MCP setup and documentation](https://walletfollow.ai/mcp).
+
 ## Install
 
 Claude Code:
